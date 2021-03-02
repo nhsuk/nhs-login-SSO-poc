@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "nhsuk-frontend@4.1.0",
+      "destination": "wwwroot/lib/nhsuk-frontend/",
+      "files": [
+        "dist/nhsuk-4.1.0.min.css",
+        "dist/nhsuk-4.1.0.min.js"
+      ]
+    }
+  ]
+}

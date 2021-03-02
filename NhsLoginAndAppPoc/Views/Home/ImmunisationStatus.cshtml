@@ -1,0 +1,88 @@
+﻿@using Microsoft.Extensions.Configuration
+@model ImmunisationStatusViewModel
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "Immunisation Status";
+}
+
+<div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+        <h1>Check your details</h1>
+
+        <dl class="nhsuk-summary-list">
+
+            @if (!string.IsNullOrEmpty(Model.Name))
+            {
+                <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                        Surname
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                        @Model.Name
+                    </dd>
+
+                </div>
+            }
+            
+            @if (Model.DateOfBirth.HasValue)
+            {
+                <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                        Date of birth
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                        @Model.DateOfBirth.Value.ToShortDateString()
+                    </dd>
+
+                </div>
+            }
+            
+            @if (!string.IsNullOrEmpty(Model.PhoneNumber) || !string.IsNullOrEmpty(Model.Email))
+            {
+                <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                        Contact details
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                        @if(!string.IsNullOrEmpty(Model.PhoneNumber))
+                        {
+                            <p>@Model.PhoneNumber</p>
+                        }
+                        @if(!string.IsNullOrEmpty(Model.Email))
+                        {
+                            <p>@Model.Email</p>
+                        }
+                    </dd>
+
+                </div>
+            }
+            
+            @if(!string.IsNullOrEmpty(Model.CovidVaccine))
+            {
+                <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                        Coronavirus vaccinations
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                        <p>@Model.CovidVaccine</p>
+                        @if (Model.FirstCovidVaccinationDate.HasValue)
+                        {
+                            <p>@Model.FirstCovidVaccinationDate.Value.ToLongDateString()</p>
+                        }
+                        @if (Model.SecondCovidVaccinationDate.HasValue)
+                        {
+                            <p>@Model.SecondCovidVaccinationDate.Value.ToLongDateString()</p>
+                        }
+                    </dd>
+
+                </div>
+            }
+
+        </dl>
+        
+        <div class="nhsuk-inset-text">
+            <span class="nhsuk-u-visually-hidden">Information: </span>
+            <p>You can manage your account details on <a href="@Model.ManageLoginUrl" title="External website">NHS login</a>.</p>
+        </div>
+    </div>
+</div>
